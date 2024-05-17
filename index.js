@@ -2,7 +2,7 @@ const express = require ('express');
 const mongoose = require ('mongoose');
 require ('dotenv').config();
 const app = express();
-const recetaRutas = require('./rutas/recetaRutas');
+const estudiantesRutas = require('./rutas/estudiantesRutas');
 
 //configuraciones de environent
 const PORT = process.env.PORT || 3000;
@@ -17,5 +17,5 @@ mongoose.connect(MONGO_URI)
     }
 ).catch(error => console.log('error de conexion', error));
 
-//utilizar las rutas de recetas
-app.use('/recetas', recetaRutas)
+//utilizar las rutas de estudiantes
+app.use('/estudiantes', estudiantesRutas)
