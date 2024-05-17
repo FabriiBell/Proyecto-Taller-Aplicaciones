@@ -17,7 +17,7 @@ rutas.post ('/anadir', async (req, res) => {
         Nombre: req.body.Nombre,
         Apellido: req.body.Apellido,
         Division: req.body.Division,
-        edad: req.body.edad,
+        Pago: req.body.Pago,
     })
     try {
         const nuevoEstudiante = await estudiante.save();
@@ -51,5 +51,78 @@ rutas.delete ('/eliminar/:id', async (req, res) => {
     catch (error) {
         res.status(500).json({ mensaje: error.message})
     }
+});
+//endpoint 5 encontrar por edad
+rutas.get('/lista/:id', async (req, res) => {
+    try {
+        const estudiantes = await  EstudianteModel.findById(req.params.id);
+        if (!estudiantes)
+            return res.status(404).json({ mensaje: 'Estudiante no encontrado'});
+        else
+            return res.json(estudiantes);
+        } 
+        catch (error) {
+            res.status(500).json({ mensaje: error.message})
+        }
+});
+//endpoint 6 encontrar por division
+rutas.get('/division/:Division', async (req, res) => {
+    try {
+        const Divisionestudiantes = await  EstudianteModel.find({ Division : req.params.Division});
+            return res.json(Divisionestudiantes);
+        } 
+        catch (error) {
+            res.status(500).json({ mensaje: error.message})
+        }
+});
+//endpoint 7  encontrar por Apellido
+rutas.get('/apellido/:Apellido', async (req, res) => {
+    try {
+        const Apellidoestudiantes = await  EstudianteModel.find({ Apellido : req.params.Apellido});
+            return res.json(Apellidoestudiantes);
+        } 
+        catch (error) {
+            res.status(500).json({ mensaje: error.message})
+        }
+});
+//endpoint 7  encontrar por Pago
+rutas.get('/Pago/:Pago', async (req, res) => {
+    try {
+        const pagosestudiantes = await  EstudianteModel.find({ Pago : req.params.Pago});
+            return res.json(pagosestudiantes);
+        } 
+        catch (error) {
+            res.status(500).json({ mensaje: error.message})
+        }
+});
+//endpoint 9 eliminar todos los estudiantes
+rutas.get('/eliminarpagos', async (req, res) => {
+    try {
+        await  EstudianteModel.deleteMany({Pago : Pago = /no/});
+            return res.json({ mensaje: "Los estudiantes que no pagaron han sido eliminados"});
+        } 
+        catch (error) {
+            res.status(500).json({ mensaje: error.message})
+        }
+});
+//endpoint 10 Contar
+rutas.get('/total/:Division', async (req, res) => {
+    try {
+        const total = await  EstudianteModel.countDocuments({ Division : req.params.Division});
+            return res.json({ totalEstudiantes : total });
+        } 
+        catch (error) {
+            res.status(500).json({ mensaje: error.message})
+        }
+});
+//endpoint 11 ordenar
+rutas.get('/ordenar', async (req, res) => {
+    try {
+        const ordenar = await  EstudianteModel.find().sort({ Nombre : 1});
+            return res.json({ ordenar });
+        } 
+        catch (error) {
+            res.status(500).json({ mensaje: error.message})
+        }
 });
 module.exports = rutas;

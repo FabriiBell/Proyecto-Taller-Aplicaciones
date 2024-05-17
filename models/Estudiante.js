@@ -5,7 +5,7 @@ const estudianteSchema = new mongoose.Schema({
     Nombre: String,
     Apellido: String,
     Division: String,
-    Edad: Number
+    Pago: String
 });
 
 const EstudianteModel = mongoose.model('Estudiante', estudianteSchema, 'estudiantesba');
