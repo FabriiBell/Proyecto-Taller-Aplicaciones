@@ -1,6 +1,7 @@
 const express = require ('express');
 const rutas = express.Router();
 const EstudianteModel = require('../models/Estudiante');
+const UsuarioModel = require('../models/Usuario');
 
 //endpoint 1 traer lista estudiantes
 rutas.get('/lista', async (req, res) => {
@@ -17,7 +18,9 @@ rutas.post ('/anadir', async (req, res) => {
         Nombre: req.body.Nombre,
         Apellido: req.body.Apellido,
         Division: req.body.Division,
+        Edad: req.body.Edad,
         Pago: req.body.Pago,
+        usuario: req.body.usuario//asignar el id de usuario
     })
     try {
         const nuevoEstudiante = await estudiante.save();
@@ -125,4 +128,47 @@ rutas.get('/ordenar', async (req, res) => {
             res.status(500).json({ mensaje: error.message})
         }
 });
+//REPORTES 1
+rutas.get('/EstudiantePorUsuario/:usuarioId', async (peticion, respuesta) =>{
+    const {usuarioId} = peticion.params;
+    console.log(usuarioId);
+    try{
+        const usuario = await UsuarioModel.findById(usuarioId);
+        if (!usuario)
+            return respuesta.status(404).json({mensaje: 'usuario no encontrado'});
+        const estudiantes = await EstudianteModel.find({ usuario: usuarioId}).populate('usuario');
+        respuesta.json(estudiantes);
+
+    } catch(error){
+        respuesta.status(500).json({ mensaje :  error.message})
+    }
+})
+//REPORTES 2
+//sumar porciones de recetas por Usuarios
+rutas.get('/EdadPorUsuario', async (req, res) => {
+    try {   
+        const usuarios = await UsuarioModel.find();
+        const reporte = await Promise.all(
+            usuarios.map( async ( usuario1 ) => {
+                const estudiantes = await EstudianteModel.find({ usuario: usuario1._id});
+                const totalEstudiantes =estudiantes.reduce((sum, estudiantesba) => sum + estudiantesba.Edad, 0);
+                return {
+                    usuario: {
+                        _id: usuario1._id,
+                        nombreusuario: usuario1.nombreusuario
+                    },
+                    totalEstudiantes,
+                    estudiantes: estudiantes.map( r => ( {
+                        _id: r._id,
+                        Nombre: r.Nombre,
+                        Edad: r.Edad
+                    }))
+                }
+            } )
+        )
+        res.json(reporte);
+    } catch (error){
+        res.status(500).json({ mensaje :  error.message})
+    }
+})
 module.exports = rutas;

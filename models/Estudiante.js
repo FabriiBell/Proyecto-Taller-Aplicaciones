@@ -5,7 +5,9 @@ const estudianteSchema = new mongoose.Schema({
     Nombre: String,
     Apellido: String,
     Division: String,
-    Pago: String
+    Edad: Number,
+    Pago: String,
+    usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario' }
 });
 
 const EstudianteModel = mongoose.model('Estudiante', estudianteSchema, 'estudiantesba');
