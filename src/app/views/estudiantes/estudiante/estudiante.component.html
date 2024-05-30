@@ -1,0 +1,83 @@
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+        <h4>Bienvenidos al Club Universitario</h4>
+        <c-card class="mb-4">
+            <c-card-header>
+              <strong>Anadir Estudiante</strong>
+            </c-card-header>
+            <c-card-body>
+                <form cForm>
+                  <div class="mb-3">
+                    <label cLabel for="exampleFormControlInput1">Nombre</label>
+                    <input cFormControl
+                           id="nombre"
+                           placeholder="Ingresar Nombre"
+                           type="text"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label cLabel for="exampleFormControlInput1">Apellido</label>
+                    <input cFormControl
+                           id="apellido"
+                           placeholder="Ingresar Apellido"
+                           type="text"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label cLabel for="exampleFormControlInput1">Division</label>
+                    <select aria-label="Default select example" cSelect>
+                        <option >Seleccionar</option>
+                        <option value="1">Sub9</option>
+                        <option value="2">Sub11</option>
+                        <option value="2">Sub13</option>
+                        <option value="2">Sub15</option>
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                    <label cLabel for="exampleFormControlInput1">Edad</label>
+                    <input cFormControl
+                           id="edad"
+                           placeholder="Edad"
+                           type="number"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label cLabel for="exampleFormControlInput1">Pago</label>
+                    <select aria-label="Default select example" cSelect>
+                        <option >Seleccionar</option>
+                        <option value="1">Si</option>
+                        <option value="2">No</option>
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                    <label cLabel for="exampleFormControlTextarea1">Example textarea</label>
+                    <textarea cFormControl id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                </form>
+                <button cButton class="me-1" color="primary" type="submit">
+                    Guardar
+                  </button>
+            </c-card-body>
+          </c-card>
+    </c-col>
+    <c-col xs="12">
+        <table cTable>
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Ingredientes<th>
+            <th scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>mark</td>
+                <td>otto</td>
+                <td><button cButton color="success" variant="outline">Editar</button><button cButton color="danger" variant="outline">Eliminar</button></td>
+              </tr>
+          </tbody>
+        </table>
+      </c-col>
+</c-row>

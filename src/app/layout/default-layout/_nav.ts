@@ -10,9 +10,37 @@ export const navItems: INavData[] = [
       text: 'NEW'
     }
   },
+  //-------------------------------Inicio
   {
     title: true,
-    name: 'Theme'
+    name: 'Club Universitario'
+  },
+  {
+    name: 'Estudiantes',
+    url: '/estudiantes',
+    iconComponent: { name: 'cil-puzzle' },
+  children: [
+    {
+      name: 'Estudiante',
+      url: '/estudiantes/estudiante',
+      icon: 'nav-icon-bullet'
+    },
+      {
+        name: 'Reportes',
+        url: '/estudiantes/reportes',
+        icon: 'nav-icon-bullet'
+      },
+  ]
+},
+  //--------------------------------Final
+  {
+    title: true,
+    name: 'Profesores'
+  },
+  {
+    name: 'Prueba',
+    url: '/theme/colors',
+    iconComponent: { name: 'cil-drop' }
   },
   {
     name: 'Colors',
