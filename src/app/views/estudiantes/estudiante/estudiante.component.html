@@ -8,76 +8,86 @@
             <c-card-body>
                 <form cForm>
                   <div class="mb-3">
-                    <label cLabel for="exampleFormControlInput1">Nombre</label>
+                    <label cLabel for="Nombre">Nombre</label>
                     <input cFormControl
+                      name="nombre"
                            id="nombre"
                            placeholder="Ingresar Nombre"
+                           [(ngModel)] = "estudianteModelo.Nombre"
                            type="text"
                     />
                   </div>
                   <div class="mb-3">
-                    <label cLabel for="exampleFormControlInput1">Apellido</label>
+                    <label cLabel for="Apellido">Apellido</label>
                     <input cFormControl
+                          name="apellido"
                            id="apellido"
                            placeholder="Ingresar Apellido"
+                           [(ngModel)] = "estudianteModelo.Apellido"
                            type="text"
                     />
                   </div>
                   <div class="mb-3">
-                    <label cLabel for="exampleFormControlInput1">Division</label>
-                    <select aria-label="Default select example" cSelect>
+                    <label cLabel for="Division">Division</label>
+                    <select name="division" aria-label="Default select example" cSelect [(ngModel)] = "estudianteModelo.Division">
                         <option >Seleccionar</option>
-                        <option value="1">Sub9</option>
-                        <option value="2">Sub11</option>
-                        <option value="2">Sub13</option>
-                        <option value="2">Sub15</option>
+                        <option value="sub9">Sub9</option>
+                        <option value="sub11">Sub11</option>
+                        <option value="sub13">Sub13</option>
+                        <option value="sub15">Sub15</option>
                       </select>
                   </div>
                   <div class="mb-3">
-                    <label cLabel for="exampleFormControlInput1">Edad</label>
+                    <label cLabel for="Edad">Edad</label>
                     <input cFormControl
                            id="edad"
+                           name="edad"
                            placeholder="Edad"
+                           [(ngModel)] = "estudianteModelo.Edad"
                            type="number"
                     />
                   </div>
                   <div class="mb-3">
-                    <label cLabel for="exampleFormControlInput1">Pago</label>
-                    <select aria-label="Default select example" cSelect>
+                    <label cLabel for="Pago">Pago</label>
+                    <select name="pago" aria-label="Default select example" cSelect [(ngModel)] = "estudianteModelo.Pago">
                         <option >Seleccionar</option>
-                        <option value="1">Si</option>
-                        <option value="2">No</option>
+                        <option value="si">Si</option>
+                        <option value="no">No</option>
                       </select>
                   </div>
-                  <div class="mb-3">
-                    <label cLabel for="exampleFormControlTextarea1">Example textarea</label>
-                    <textarea cFormControl id="exampleFormControlTextarea1" rows="3"></textarea>
-                  </div>
                 </form>
-                <button cButton class="me-1" color="primary" type="submit">
+                <button (click)="guardarEstudiante()" cButton class="me-1" color="primary" type="submit">
                     Guardar
                   </button>
             </c-card-body>
           </c-card>
     </c-col>
-    <c-col xs="12">
+    <c-col xs="16">
+      <h4>Estudiantes</h4>
         <table cTable>
           <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Ingredientes<th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Division</th>
+            <th scope="col">Pago</th>
             <th scope="col">Acciones</th>
           </tr>
           </thead>
           <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>mark</td>
-                <td>otto</td>
-                <td><button cButton color="success" variant="outline">Editar</button><button cButton color="danger" variant="outline">Eliminar</button></td>
-              </tr>
+            @for (estudiantes of listaEstudiantes; track estudiantes; ){
+                <tr>
+                    <td>{{estudiantes.Nombre}}</td>
+                    <td>{{estudiantes.Apellido}}</td>
+                    <td>{{estudiantes.Division}}</td>
+                    <td>{{estudiantes.Pago}}</td>
+                    <td>
+                      <button (click)="verEstudiante(estudiantes)" cButton color="success" variant="outline">Editar</button>
+                      <button (click)="eliminarEstudiante(estudiantes)" cButton color="danger" variant="outline">Eliminar</button>
+                    </td>
+                  </tr>  
+            }
           </tbody>
         </table>
-      </c-col>
+      </c-col> 
 </c-row>

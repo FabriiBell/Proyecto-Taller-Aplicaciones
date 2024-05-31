@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
+import { AuthGuard } from './auth.guard'; // Importa el guardia de autenticación
 
 export const routes: Routes = [
   {
